@@ -1,14 +1,14 @@
 #include<stdio.h>
 #define IN 1
 #define OUT 0
-graph(int k)
+void graph(int k)
 {
 	for(int i=0;i<k;i++)
 		putchar('#');
 	printf("%d",k);
 	putchar('\n');
 }
-main()
+int main()
 {
 	int space=0,row=0,words=0,sum=0;
 	int state=OUT;
