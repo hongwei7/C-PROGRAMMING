@@ -6,6 +6,10 @@ main()
 	int s=0,ci=0;
 	while((c=getchar())!=EOF)
 	{
+		if(ci>=MAXCOL-1){
+			ci=0;
+			putchar('\n');
+		}
 		if(c==' ')
 			s++;
 		else{
@@ -14,14 +18,10 @@ main()
 				ci++;
 			}
 			s=0;
-			putchar(c);
 			ci++;
 			if(c=='\n')
 				ci=0;
-		}
-		if(ci>=MAXCOL){
-			ci=0;
-			putchar('\n');
+			putchar(c);
 		}
 	}
 }
