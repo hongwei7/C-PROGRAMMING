@@ -36,7 +36,7 @@ main()
     clock_t t1,t2;
     t1=clock();
     old=old_bin_search(x,v,16);
-    t1=(double)(clock()-t1);
+    t1=(clock()-t1);
     t2=clock();
     new=bin_search(x,v,16);
     t2=(clock()-t2);
