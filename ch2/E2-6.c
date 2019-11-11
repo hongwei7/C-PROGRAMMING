@@ -1,6 +1,6 @@
 #include<stdio.h>
 #define INTLENGTH 32
-int setbits(int x,int p,int n,int y)
+unsigned setbits(int x,int p,int n,int y)
 {
     return (((~((~0)<<n))&y)<<(INTLENGTH-n-p-1))|(x&(~(((~((~0)<<n))&(~0))<<(INTLENGTH-n-p-1))));
 }
