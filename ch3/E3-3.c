@@ -26,7 +26,7 @@ void expand(char s1[],char s2[])
     }
     *(++q)='\0';
 }
-main()
+int main()
 {
     char s[50]="a-fkji1-90-5";
     char s1[50]=" ";
