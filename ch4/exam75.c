@@ -16,7 +16,7 @@ int main()
 
 	while((type=getop(s)) != EOF){
 		switch(type){
-			case  NUMBER:push(atof(s)); break;
+			case NUMBER:push(atof(s)); break;
 			case '+':push(pop()+pop());break;
 			case '*':push((pop()*pop()));break;
 			case '-':op2=pop(); push(pop()-op2);break;
@@ -67,7 +67,7 @@ int getop(char s[])
 {
 	int i,c;
 	while((s[0]=c=getch())==' '||c=='\t');
-	s[1]='0';
+	s[1]='\0';
 	if(!isdigit(c)&&c!='.')
 		return c;
 	i=0;
@@ -75,7 +75,7 @@ int getop(char s[])
 		while(isdigit(s[++i]=c=getch()));
 	if(c=='.')
 		while(isdigit(s[++i]=c=getch()));
-	s[i]='0';
+	s[i]='\0';
 	if(c!=EOF)
 		ungetch(c);
 	return NUMBER;
