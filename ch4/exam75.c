@@ -43,8 +43,15 @@ double pop(void);
 			case '\n':
 				printf("\t%.8g\n",pop());
 				break;
+            case '=':
+
 			default: 
-				printf("error:unknown command %s\n",s);
+                if(type<='Z'&&type>='A'){
+                    push(variable[type-'A']);
+                    break;
+                }
+                else
+                    printf("error:unknown command %s\n",s);
 				break;				
 		}
 	}
