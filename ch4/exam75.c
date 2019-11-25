@@ -11,12 +11,12 @@ double pop(void);
 
  int main()
 {
-	int type;
+	int type,var;
 	double op2;
 	char s[MAXOP];
-	double variable[42];
+	double variable[42],var_value;
 	for(int i=0;i<42;i++)
-		variable[i]=0;
+		variable[i]=0.0;
 	while((type=getop(s)) != EOF){
 		switch(type){
 			case NUMBER:push(atof(s)); break;
@@ -41,12 +41,22 @@ double pop(void);
 				push(sin(pop()));
 				break;
 			case '\n':
+                var = 0;
 				printf("\t%.8g\n",pop());
 				break;
             case '=':
-
+                if(var==0)
+                    printf("error:failed to give value\n");
+                else{
+                    variable[var-'A']=pop();
+                    printf("\t%c = ",var);
+                    pop();
+                    push(variable[var-'A']);
+                }
+                break;
 			default: 
                 if(type<='Z'&&type>='A'){
+                    var=type;   
                     push(variable[type-'A']);
                     break;
                 }
