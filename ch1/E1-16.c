@@ -9,6 +9,7 @@ void copy(char to[],char from[])
 }
 main()
 {
+    
     int len;
     int max;
     char line[MAXLINE];
