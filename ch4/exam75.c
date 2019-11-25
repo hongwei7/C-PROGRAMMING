@@ -9,11 +9,14 @@ int getop(char[]);
 void push(double);
 double pop(void);
 
-int main()
+ int main()
 {
 	int type;
 	double op2;
 	char s[MAXOP];
+	double variable[42];
+	for(int i=0;i<42;i++)
+		variable[i]=0;
 	while((type=getop(s)) != EOF){
 		switch(type){
 			case NUMBER:push(atof(s)); break;
@@ -125,7 +128,7 @@ int getop(char s[])
 		if((c1=getch())=='i'&&(c2=getch())=='n')
 			return 's';
 		else{
-			ungetch(c1);ungetch(c2);
+			ungetch(c2);ungetch(c1);
 			return 'u';
 		}
 		break;
@@ -133,7 +136,7 @@ int getop(char s[])
 		if((c1=getch())=='o'&&(c2=getch())=='w')
 			return 'p';
 		else{
-			ungetch(c1);ungetch(c2);
+			ungetch(c2);ungetch(c1);
 			return 'u';
 		}
 		break;
@@ -141,7 +144,7 @@ int getop(char s[])
 		if((c1=getch())=='x'&&(c2=getch())=='p')
 			return 'e';
 		else{
-			ungetch(c1);ungetch(c2);
+			ungetch(c2);ungetch(c1);
 			return 'u';
 		}
 		break;
