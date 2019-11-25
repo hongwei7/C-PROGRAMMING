@@ -204,7 +204,7 @@ void ungetch(int c)
 void ungets(char s[])
 {
     int i=0;
-    while(;s[i]!='\0';i++);
+    for(;s[i]!='\0';i++);
     for(;i>=0;i--)
     {
         ungetch(s[i]);
