@@ -19,13 +19,18 @@ void afree(char *p)//释放p指向的存储区
 }
 int main()
 {
-    printf("Hello world\n");
     int get_space=20;
     char * p= alloc(get_space);
     for(int i=0;i<get_space-1;i++)
         p[i]='N';
     p[get_space]='0';
     printf("get\t%s\n",p);
+    char *q=alloc(30);
+    q="hello new world";
+    printf("get\t%s\n",q);
+    char *s="hello";
+    s="hihi";
+    printf("get\t%s\n",s);
     return 0;
 }
 
