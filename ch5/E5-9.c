@@ -10,9 +10,9 @@ static char daytab[2][13] = {
  int day_of_year(int year, int month, int day)
 {
      int i, leap;
-      leap = year%4 == 0 && year%100 != 0 || year%400 == 0;
+      leap = (year%4 == 0 && year%100 != 0 )|| year%400 == 0;
        for (i = 1; i < month; i++)
-            day += daytab[leap][i];
+            day += *(*(daytab+leap)+i);
         return day;
 }
 
@@ -22,9 +22,9 @@ static char daytab[2][13] = {
 {
 
      int i, leap;
-      leap = year%4 == 0 && year%100 != 0 || year%400 == 0;
+      leap = (year%4 == 0 && year%100 != 0 )|| year%400 == 0;
        for (i = 1; yearday > daytab[leap][i]; i++)
-            yearday -= daytab[leap][i];
+            yearday -= *(*(daytab+leap)+i);
         *pmonth = i;
 }
 
