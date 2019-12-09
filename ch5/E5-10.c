@@ -8,21 +8,26 @@
 int getop(char[]);
 void push(double);
 double pop(void);
-double getvalue(void)
-void copyvalue(void)
-void swaptop(void)
+double getvalue(void);
+void copyvalue(void);
+void swaptop(void);
 
 
 
- int main()
+ int main(int argc , char *argv[])
 {
+    if(argc==1){
+        printf("Usage: \t./E5-10 [inv poland exp]\nExp: \t./E5-10 4 2 3 + *\nOut:\t20\n");
+        return 1;
+    }
+
 	int type,var;
 	double op2;
-	char s[MAXOP];
-	double variable[42],ans;
-	for(int i=0;i<42;i++)
-		variable[i]=0.0;
-	while((type=getop(s)) != EOF){
+	double ans;
+
+	for(int i=1;i<argc;i++){
+		type=getop(argv[i]);
+		char *s=argv[i];
 		switch(type){
 			case NUMBER:push(atof(s)); break;
 			case '+':push(pop()+pop());break;
@@ -32,7 +37,7 @@ void swaptop(void)
 				if(op2!=0.0)
 					push(pop()/op2);
 				else 
-					printf("error:divided by zero!/n");
+					printf("error:divided by zero!\n");
 				break;
 			case '%':
 				op2=pop();
@@ -57,31 +62,21 @@ void swaptop(void)
                 ans=pop();
 				printf("\t%.8g\n",ans);
 				break;
-            case '=':
-                if(var==0)
-                    printf("error:failed to give value\n");
-                else{
-                    variable[var-'A']=pop();
-                    printf("%c = ",var);
-                    pop();
-                    push(variable[var-'A']);
-                }
-                break;
 			default: 
-                if(type<='Z'&&type>='A'){
-                    var=type;   
-                    push(variable[type-'A']);
-                    break;
-                }
-                else if(type=='~'){
+                if(type=='~'){
                     push(ans);
                     break;
                 }
-                else
-                    printf("error:unknown command %s\n",s);
+                else{
+                    printf("error:unknown command : \"%s\"\n",s);
+                    printf("Usage: \t./E5-10 [inv poland exp]\nExp: \t./E5-10 4 2 3 + *\nOut:\t20\n");
+                    return 1;
+                }
 				break;				
 		}
 	}
+    ans=pop();
+    printf("Ans =\t%.8g\n",ans);
 	return 0;
 }
 
@@ -135,87 +130,53 @@ void swaptop(void)
 }
 //*****************getop****************
 #include<ctype.h>
-int getch(void);
-void ungetch(int);
-void ungets(char s[]);
 
 int getop(char s[])
 {
 	int i,c;
 	int c1,c2;
-	while((s[0]=c=getch())==' '||c=='\t');
-	s[1]='\0';
+	c=s[0];
 	if(!isdigit(c)&&c!='.'&&c!='-'&&c!='s'&&c!='p'&&c!='e')
 		return c;
 	i=0;
 	switch (c){
 		case '-':
-		if (isdigit(c=getch())||c=='.')
-		{
-			s[++i]=c;
-		}
-		else{
-			if(c!=EOF)
-				ungetch(c);
+		if (isdigit(c=s[++i])||c=='.')
+			;
+		else
 			return '-';
-		}break;
+		break;
 		case 's':
-		if((c1=getch())=='i'&&(c2=getch())=='n')
+		if((c1=s[++i])=='i'&&(c2=s[++i])=='n')
 			return 's';
 		else{
-			ungetch(c2);ungetch(c1);
+			i-=2;
 			return 'u';
 		}
 		break;
 		case 'p':
-		if((c1=getch())=='o'&&(c2=getch())=='w')
+		if((c1=s[++i])=='o'&&(c2=s[++i])=='w')
 			return 'p';
 		else{
-			ungetch(c2);ungetch(c1);
+			i-=2;
 			return 'u';
 		}
 		break;
 		case 'e':
-		if((c1=getch())=='x'&&(c2=getch())=='p')
+		if((c1=s[++i])=='x'&&(c2=s[++i])=='p')
 			return 'e';
 		else{
-			ungetch(c2);ungetch(c1);
+			i-=2;
 			return 'u';
 		}
 		break;
 		default : break;
 	}
 	if(isdigit(c))
-		while(isdigit(s[++i]=c=getch()));
+		while(isdigit(s[++i]));
 	if(c=='.')
-		while(isdigit(s[++i]=c=getch()));
-	s[i]='\0';
-	if(c!=EOF)
-		ungetch(c);
+		while(isdigit(s[++i]));
 	return NUMBER;
-}
-#define BUFSIZE 100
-char buf[BUFSIZE];
-int bufp=0;
-int getch(void)
-{
-	return (bufp>0)?buf[--bufp]:getchar();
-}
-void ungetch(int c)
-{
-	if(bufp>=BUFSIZE)
-		printf("ungetch: too many characters\n");
-	else
-		buf[bufp++]=c;
-}
-void ungets(char s[])
-{
-    int i=0;
-    for(;s[i]!='\0';i++);
-    for(;i>=0;i--)
-    {
-        ungetch(s[i]);
-    }
 }
 
 

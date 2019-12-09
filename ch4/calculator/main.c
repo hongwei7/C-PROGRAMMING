@@ -37,6 +37,13 @@ int main()
         case 's':
             push(sin(pop()));
             break;
+        case 'p':
+                op2=pop();
+                push(pow(pop(),op2));
+                break;
+        case 'e':
+            push(pow(2.718281828,pop()));
+            break;
         case '\n':
             var = 0;
             ans = pop();
