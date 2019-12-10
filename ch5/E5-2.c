@@ -15,6 +15,7 @@
      else
          buf[bufp++]=c;
  }
+
 void ungets(char s[])
  {
      int i=0;
