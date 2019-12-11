@@ -27,8 +27,7 @@ int getline_()
 }
 int main(int argc,char *argv[])
 {
-    printf("%s\n",argv[1]);
-    if(argc>2){
+    if(argc!=2){
         printf("Usage:\ttail -n \n");
         return 1;
     }
