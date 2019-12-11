@@ -46,7 +46,6 @@ int main(int argc,char *argv[])
             printf("Usage:\ttail -n \n");
             return 1;
         }
-    printf("n=\t%d\n",n);
     while(getline_());
     for(int i=(lineptrp-n>0)?(lineptrp-n):0;i<lineptrp;i++)
         printf("%s\n",lineptr[i]);
